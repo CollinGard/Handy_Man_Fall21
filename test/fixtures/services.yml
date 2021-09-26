@@ -2,12 +2,12 @@
 
 one:
   job_type: MyString
-  cost: 1
+  cost: 1.5
   date: MyString
   worker: one
 
 two:
   job_type: MyString
-  cost: 1
+  cost: 1.5
   date: MyString
   worker: two

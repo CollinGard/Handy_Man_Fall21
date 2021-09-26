@@ -17,14 +17,14 @@
   5.times do
     Service.create(
       job_type: Faker::Job.field,
-      cost: Faker::Business.credit_card_type,
+      cost: Faker::Number.decimal(l_digits: 2),
       date: Faker::Date.between,
       worker_id: @worker.id
     )
 
     5.times do
       Comment.create(
-        topic: Faker::Job.field,
+        topic: Faker::Science.element_state,
         description: Faker::Company.bs,
         address: Faker::Address.,
         service_id: @service.id
