@@ -20,9 +20,9 @@ const Workers = () => {
     // add in the db
     // add in the state in the client 
     //  { todo: {title: "", complete: false}}
-    axios.post('/api/workers', { todo })
+    axios.post('/api/workers', { worker })
       .then( res => {
-        setWorkers([...todos, res.data])
+        setWorkers([...workers, res.data])
       })
       .catch( err => console.log(err))
   }
