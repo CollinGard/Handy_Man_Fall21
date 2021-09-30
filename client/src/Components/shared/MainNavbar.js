@@ -23,8 +23,8 @@ const MainNavbar = () => {
         <NavItem href="/about">
           About
         </NavItem>
-        <NavItem href="/todos">
-          Todos
+        <NavItem href="/workers">
+          Workers
         </NavItem>
       </Navbar>
     </>
