@@ -19,7 +19,7 @@ const MainNavbar = () => {
           outDuration: 200,
           preventScrolling: true
         }}
-      >
+        >
         <NavItem href="/about">
           About
         </NavItem>

@@ -15,10 +15,10 @@
   )
 
   5.times do
-    Service.create(
+   @service = Service.create(
       job_type: Faker::Job.field,
       cost: Faker::Number.decimal(l_digits: 2),
-      date: Faker::Date.between,
+      date: Faker::Date.between(from: 30.days.ago,to: Date.today),
       worker_id: @worker.id
     )
 
@@ -26,9 +26,17 @@
       Comment.create(
         topic: Faker::Science.element_state,
         description: Faker::Company.bs,
-        address: Faker::Address.,
+        address: Faker::Address.street_address,
         service_id: @service.id
+      )
+    end
   end 
 end 
 
 puts "Data Seeded"
+@workers = Worker.all
+@services = Service.all
+@comments = Comment.all
+p @workers
+p @services
+p @comments

@@ -1,67 +1,38 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useState } from 'react';
+import WorkerForm from './WorkerForm';
+//import Comments from '../Comments/Comments';
 
-const Workers = () => {
-  const [workers, setWorkers] = useState([])
-
-  // before it mounts 
-  useEffect( () => {
-    // grab the todos from the db
-    axios.get('/api/workers')
-      .then( res => {
-        // and set it to state
-        setWorkers(res.data)
-      })
-      .catch( err => console.log(err))
-  }, [])
-
-  // add todo
-  const addWorker = (worker) => {
-    // add in the db
-    // add in the state in the client 
-    //  { todo: {title: "", complete: false}}
-    axios.post('/api/workers', { worker })
-      .then( res => {
-        setWorkers([...workers, res.data])
-      })
-      .catch( err => console.log(err))
-  }
-
-  // update todo
-  const updateWorker = (id, worker) => {
-    // update in the db
-    //  { todo: {title: "", complete: false}}
-    axios.put(`/api/workers/${id}`, { worker })
-      .then( res => {
-        // update in the state in the client 
-        const updatedWorkers = workers.map( t => {
-          if (t.id == id) {
-            return res.data
-          }
-          return t
-        })
-        setWorkers(updatedWorkers)
-      })
-      .catch( err => console.log(err))
-  }
-
-
-  // delete todo 
-  const deleteWorker = (id) => {
-    // delete in the db
-    axios.delete(`/api/workers/${id}`)
-      .then( res => {
-        // delete in the state in the client 
-        setWorkers(workers.filter( t => t.id !== id))
-      })
-      .catch( err => console.log(err))
-  }
+const Worker = ({ id, first_name, last_name, phone_number, deleteWorker, updateWorker }) => {
+  const [editing, setEdit] = useState(false)
 
   return (
     <>
-
+      <li>
+        {first_name}
+        <br />
+        {last_name}
+        <br />
+        {phone_number}
+        {
+          editing ?
+          <>
+            <WorkerForm
+              id={id}
+              first_name={first_name}
+              last_name={last_name}
+              phone_number={phone_number}
+              updateWorker={updateWorker}
+              setEdit={setEdit}
+            />
+          </>
+          :
+          <button onClick={() => setEdit(true)}>Edit</button>
+        }
+        <button onClick={() => deleteWorker(id)}>Delete</button>
+      </li>
+      
     </>
   )
 }
 
-export default Workers;
+export default Worker;
